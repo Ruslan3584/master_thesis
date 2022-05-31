@@ -1,0 +1,326 @@
+\section{Еквівалентні перетворення}
+
+Існує достатня умова оптимальності нечіткої розмітки. Якщо нечітка розмітка
+$(\alpha, \beta)$ задовольняє умовам
+\begin{equation}
+    \label{eqn:trivial_optim_cond}
+    \begin{cases}
+      q_t(k)< \max\limits_{l \in K} q_t(l) , & \implies \alpha_t(k)=0,\\
+      g_{tt'}(k,k')<\max\limits_{l\in K, l'\in K} g_{tt'}(k,k'), & \implies 
+        \beta_{tt'}(k,k')=0,
+    \end{cases}
+  \end{equation}
+тоді розмітка є оптимальною нечіткою розміткою. Дана умова є дуже строгою, 
+тому лише невеликий клас задач підпадає під цю умову. Задачі, які задовольняють
+цю умову, називаються тривіальними. Можна послабити
+умову (\ref{eqn:trivial_optim_cond}), використовуючи концепцію еквівалентних
+перетворень \cite{SchlGig_1_usim2007, Shlezinger_synt}, також відому під назвою репараметризація. 
+Дві задачі нечіткої розмітки $(q^1,g^1)$ та $(q^2,g^2)$, що визначені на однаковій множині об'єктів
+$T$ та однаковій множині міток $K$, називаються еквівалентними, $(q^1,g^1) \sim (q^2,g^2)$,
+якщо якості кожної нечіткої розмітки однієї задачі дорівнюють якості цієї ж
+нечіткої розмітки іншої задачі. Також відомо, що для кожної задачі нечіткої
+розмітки $(q,g)$ існує тривіальний еквівалент. Задача $(q^*,g^*)$, яка мінімізує
+значення 
+\begin{equation}
+   E(q',g') = \sum\limits_{tt'\in\Gamma}\max\limits_{k\in K, k'\in K}g'_{tt'}(k,k')+
+    \sum\limits_{t\in T}\max\limits_{k\in K} q'_t(k),
+  \end{equation}
+називається потужністю класу еквівалентності
+\begin{equation}
+    (q^*,g^*) = \argmin\limits_{(q',g')\sim (q,g)} E(q',g').
+   \end{equation}
+
+Дві задачі розмітки із якостями $q^1$, $g^1$ і $q^2$, $g^2$ відповідно
+є еквівалентними тоді й тільки тоді, якщо існує такий набір чисел 
+$\varphi_{tt'}(k), t\in T, t'\in N(t), k\in K$, який задовольняє нерівності
+\begin{equation}
+    \begin{cases}
+      q^1_t(k) = q^2_t(k) - \sum\limits_{t'\in N(t)} \varphi_{tt'}(k), & t\in T, k\in K,\\
+      g^1_{tt'}(k,k') = g^2_{tt'}(k,k') + \varphi_{tt'}(k) + \varphi_{t't}(k), & 
+        tt'\in\Gamma, k\in K, k'\in K.
+    \end{cases}
+  \end{equation}
+Таким чином, потужність еквівалентно трансформованої задачі може бути 
+явно виражена як функція $\varphi$
+\begin{equation}
+    \label{eqn:trivial_power}
+    E(\varphi) = \sum\limits_{tt'\in\Gamma}\max\limits_{k\in K, k'\in K}[ g_{tt'}(k,k')
+    + \varphi_{tt'}(k) + \varphi_{t't}(k)] + 
+    \sum\limits_{t\in T}\max\limits_{k\in K}[ q_t(k) - \sum\limits_{t'\in N(t)} \varphi_{tt'}(k)],
+   \end{equation}
+і зведення задачі до тривіальної може бути шляхом мінімізації (\ref{eqn:trivial_power})
+без жодних обмежень на $\varphi$.
+
+\section{Представлення у вигляді задачі лінійного програмування}
+
+Представимо $(\max,+)$ задачу розмітки як задачу 
+лінійного програмування \cite{Werner:2010, savchynskyy}. Для кожної
+вершини $(t,k)$, $t\in T$, $k\in K$ введемо число $\alpha_t(k)\in [0,1]$.
+Для кожного ребра $((t,k),(t',k')$, $t\in T$, $k\in K$, $t'\in N_t$, $k'\in K)$, яке поєднує мітки
+$k,k'$ в сусідніх об'єктах $t,t'$ введемо число $\beta_{tt'}(k,k')$. 
+
+Елементи вектору $\alpha_t(k)$, що відповідають вершинам, мають бути узгодженими з 
+з розміткою $k$, тобто якщо виконується $\alpha_t(k^*)=1$ для якоїсь мітки
+$k^*\in K$, то має також виконуватися $k(t)=k^*$. За визначенням, для задання розмітки
+$k\in K^T$ потрібно в кожному об'єкті $t\in T$ обрати єдину мітку $k\in K$.
+Тому на елементи вектора $\alpha_t(k)$ накладаються обмеження однозначності для
+кожної вершини в об'єкті
+\begin{equation}
+   \sum\limits_{k \in K} \alpha_t(k)=1,  t\in T.
+ \end{equation}
+Відмітимо, що для випадку $\alpha_t(k)\in \{0,1\}$ ця умова якраз і означає
+вибір єдиної мітки в об'єкті, так як для обраної мітки $k^*$ буде виконуватися
+$\alpha_t(k^*)=1$, а для всіх інших міток $k'\in K:k'\neq k^*$ 
+\begin{equation}
+  \sum\limits_{k \in K, k\neq k^*} \alpha_t(k)=0.
+\end{equation}
+
+Об'єкт $t'\in T$ є сусідом об'єкту $t\in T$, тобто $tt'\in \Gamma$. Якщо 
+в об'єкті $t'$ була обрана мітка $k'\in K$, то має існувати таке ребро, яка поєднує
+якусь із вершин об'єкту $t'in T$ і вершину $(t',k')$, тобто
+\begin{equation}
+  \sum\limits_{k\in K}\beta_{tt'}(k,k')=\alpha_{t'}(k'), \forall t\in T, t'\in N_t, k'\in K.
+\end{equation}
+Обмеження такого виду називають поєднуючими. 
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.5\textwidth]{images/coupling_constr.jpg}
+  \caption{Поєднуючі обмеження}
+  \label{fig:coupling_constr}
+\end{figure}
+
+Якщо $\beta_{tt'}(k,k')\in \{0,1\}$, $\forall tt'\in\Gamma$, $k\in K$, $k'\in K$, 
+то з цих обмежень також випливає, що між двома сусідніми об'єктами $tt'\in\Gamma$ може бути 
+обране лише одне ребро, тобто додатково накладаються обмеження однозначності
+для ребер між парами сусідніх об'єктів
+\begin{equation}
+  \sum\limits_{k \in K, k'\in K} \beta_{tt'}(k,k')=1, \forall tt'\in\Gamma.
+\end{equation}
+Таким чином отримуємо наступну множину обмежень
+\begin{equation}
+  L \equiv  
+  \begin{cases}
+    \sum\limits_{k' \in K} \beta_{tt'}(k,k') = \alpha_t(k), & t\in T, k\in K, t'\in N_t,\\
+    \sum\limits_{k \in K} \alpha_t(k)=1, & t\in T,\\
+    \beta_{tt'}(k,k')\geq 0, & tt'\in \Gamma, k\in K, k'\in K,\\
+    \alpha_t(k)\geq 0, & t\in T, k\in K.
+  \end{cases}
+\end{equation} 
+Позначимо множину всіх вершин і ребер графу як $I$
+\begin{equation}
+  I = \{(t,k):t\in T, k\in K\}\cup\{((t,k),(t',k')):t\in T, t'\in\Gamma, k\in K, k'\in K\}.
+\end{equation}
+Позначимо множину всіх якостей задачі як $\theta$
+\begin{equation}
+  \theta = \{q_t(k):t\in T, k\in K\}\cup\{g_{tt'}(k,k'):t\in T, t'\in\Gamma, k\in K, k'\in K\}.
+\end{equation}
+Множину всіх чисел $\alpha, \beta$ позначимо як
+\begin{equation}
+  \mu = \{\alpha_t(k):t\in T, k\in K\}\cup\{\beta_{tt'}(k,k'):t\in T, t'\in\Gamma, k\in K, k'\in K\}.
+\end{equation}
+
+Тоді $(\max,+)$ задачу розмітки можна представити як задачу лінійного програмування
+\begin{equation}
+  \max\limits_{\mu\in L\cap \{0,1\}}\langle\theta,\mu\rangle.
+\end{equation}
+Легко побачити, що виконується наступна рівність
+\begin{equation}
+  \max_{k\in K^T} G(k) = \max\limits_{\mu\in L\cap \{0,1\}}\langle\theta,\mu\rangle.
+\end{equation}
+Розпишемо скалярний добуток правої частини рівняння вище у явному вигляді
+\begin{equation}
+  \label{eqn:linear_prog}
+  \begin{aligned}
+  \max\limits_{\mu\in L\cap \{0,1\}}\langle\theta,\mu\rangle = 
+  \max\limits_{\mu\in L\cap \{0,1\}} \left[ \sum\limits_{t\in T}\sum\limits_{k\in K} \alpha_t(k)\cdot q_t(k) +
+  \sum\limits_{tt'\in \Gamma}\sum\limits_{k,k'\in K} \beta_{tt'}(k,k')\cdot g_{tt'}(k,k') \right].
+  \end{aligned}
+\end{equation}
+Дуалізуємо поєднуючі обмеження задачі (\ref{eqn:linear_prog}). Новий доданок буде 
+мати вигляд:
+\begin{equation}
+  \label{eqn:relax}
+  \sum\limits_{t\in T}\sum\limits_{t'\in N_t}\sum\limits_{k\in K} \varphi_{tt'}(k)\cdot \left[ \sum\limits_{t'\in T}\beta_{tt'}(k,k')-\alpha_t(k) \right],
+\end{equation}
+де змінні $\varphi_{tt'}(k)\in \mathbb{R}$, $t\in T$, $t'\in N_t$, $k\in K$ є дуальними. В подальшому будемо 
+називати їх потенціалами.
+Перепишемо функцію (\ref{eqn:linear_prog}) з урахуванням нового доданку (\ref{eqn:relax}), в якому
+розкриємо дужки
+\begin{equation}
+  \begin{aligned}
+  \langle\theta^{\varphi},\mu\rangle = \sum\limits_{t\in T}\sum\limits_{k\in K} \alpha_t(k)\cdot q_t(k)+
+  \sum\limits_{tt'\in \Gamma}\sum\limits_{k,k'\in K} \beta_{tt'}(k,k')\cdot g_{tt'}(k,k')+\\
+  \sum\limits_{t\in T}\sum\limits_{t'\in N_t}\sum\limits_{k\in K} \varphi_{tt'}(k)\cdot
+  \sum\limits_{t'\in T}\beta_{tt'}(k,k') - \sum\limits_{t\in T}\sum\limits_{t'\in N_t}\sum\limits_{k\in K} \varphi_{tt'}(k)\cdot \alpha_t(k).
+  \end{aligned}
+\end{equation}
+Згрупуємо доданки в такому порядку: перший і останній, другий і третій
+\begin{equation}
+  \label{eqn:reparam}
+  \begin{aligned}
+  \langle\theta^{\varphi},\mu\rangle = \sum\limits_{t\in T}\sum\limits_{k\in K} \alpha_t(k)\cdot \left[ q_t(k)- \sum\limits_{t'\in N_t} \varphi_{tt'}(k) \right]+\\
+  \sum\limits_{tt'\in \Gamma}\sum\limits_{k,k'\in K} \beta_{tt'}(k,k')\cdot \left[g_{tt'}(k,k') + \varphi_{tt'}(k) + \varphi_{t't}(k') \right].
+  \end{aligned}
+\end{equation}
+
+Введемо позначення для репараметризованої якості за вибір мітки $k\in K$ в 
+об'єкті $t\in T$
+\begin{equation}
+  \label{eqn:reparam_unary}
+  q^{\varphi}_t(k) = q_t(k) - \sum\limits_{t'\in N_t} \varphi_{tt'}(k).
+\end{equation}
+Репараметризована якість у вершині отримується шляхом віднімання потенціалів
+що виходять з даної вершини $(t,k)$, $t\in T$, $k\in K$ в усі сусідні об'єкти
+$t'\in N_t$, від вихідної якості в даній вершині. Також введемо позначення для 
+репараметризованої якості за вибір пари міток $k\in K$, $k'\in K$ у двох сусідніх
+об'єктах $tt'\in\Gamma$
+\begin{equation}
+  \label{eqn:reparam_binary}
+  g^{\varphi}_{tt'}(k,k') = g_{tt'}(k,k') + \varphi_{tt'}(k) + \varphi_{t't}(k'),
+\end{equation}
+тобто репараметризована якість за вибір ребра $((t,k),(t',k')$, $t\in T$, $t'\in N_t$, $k\in K, k'\in K)$
+отримується шляхом додавання потенціалів, що виходять в об'єкти, які дане ребро поєднує($t,t'\in T$)
+до вихідної якості за дане ребро.
+
+Використаємо вищенаведені позначення у виразі (\ref{eqn:reparam})
+\begin{equation}
+  \begin{aligned}
+  \langle\theta^{\varphi},\mu\rangle =  \sum\limits_{t\in T}\sum\limits_{k\in K} \alpha_t(k)\cdot q^{\varphi}_t(k)+
+  \sum\limits_{tt'\in \Gamma}\sum\limits_{k,k'\in K} \beta_{tt'}(k,k')\cdot g^{\varphi}_{tt'}(k,k').
+  \end{aligned}
+\end{equation}
+
+\textbf{Твердження.}
+Після перетворень (\ref{eqn:reparam_unary}) та (\ref{eqn:reparam_binary}) значення
+штрафної функції не зміниться для будь-якої розмітки $k\in K^T$.
+
+Для доведення цього твердження запишемо штрафну функцію з репараметризованими
+якостями 
+\begin{equation}
+  \begin{aligned}
+  G^{\varphi}(k) =  \sum\limits_{t\in T} q^{\varphi}_t(k)+
+  \sum\limits_{tt'\in \Gamma} g^{\varphi}_{tt'}(k,k')=\\
+  =\sum\limits_{t\in T}  \left[ q_t(k)- \sum\limits_{t'\in N_t} \varphi_{tt'}(k) \right]+\\
+  +\sum\limits_{tt'\in \Gamma} \left[g_{tt'}(k,k') + \varphi_{tt'}(k) + \varphi_{t't}(k') \right].
+  \end{aligned}
+\end{equation}
+Розкриємо дужки в останньому виразі
+\begin{equation}
+  \begin{aligned}
+  G^{\varphi}(k) =  \sum\limits_{t\in T} q_t(k)-\sum\limits_{t\in T}\sum\limits_{t'\in N_t}\varphi_{tt'}(k)+\\
+  +\sum\limits_{tt'\in \Gamma}g_{tt'}(k,k')+\sum\limits_{tt'\in \Gamma}\left[ \varphi_{tt'}(k) + \varphi_{t't}(k')\right]=G(k),
+  \end{aligned}
+\end{equation}
+тому що перший і третій доданки в сумі дають $G(k)$, а другий і четвертий доданки в сумі дорівнюють нулю.
+Отримали, що 
+\begin{equation}
+  G^{\varphi}(k) = G(k), \forall k\in K^T.
+\end{equation}
+
+Маємо двоїсту задачу, цільову функцію якої будемо мінімізувати
+\begin{equation}
+  \min_{\Phi}\max_{\mu\in L\cap \{0,1\}}\langle\theta,\mu\rangle,
+\end{equation}
+де 
+\begin{equation}
+  \Phi = \{\varphi_{tt'}(k)\in\mathbb{R}|t\in T, t'\in N_t, k\in K\}.
+\end{equation}
+Отримали остаточний вигляд дуальної цільової функції, яку будемо мінімізувати
+по набору дуальних змінних $\varphi$.
+
+
+\section{Властивості задачі}
+
+Задача розмітки називається супермодулярною, якщо існує таке відношення
+$n:T\times K\rightarrow {1,\dots, \left\lvert K\right\rvert } $, 
+що для будь-яких значень $k\in K$, $k'\in K$, $l \in K$, $l'\in K$, $tt'\in \Gamma$ з умов 
+$n_t(k)\geq n_t(l)$ та $n_t'(k')\geq n_t'(l')$ випливає
+\begin{equation}
+    g_{tt'}(k,k') + g_{tt'}(l,l')\geq g_{tt'}(k,l') + g_{tt'}(l,k').
+   \end{equation}
+Ребра $((t,k),(t',k')))$ і $((t,l),(t',l'))$ називають паралельними, 
+а ребра $((t,l),(t',k'))$ називають перехресними, тому наведену нерівність
+можна інтерпретувати наступним чином: сума якостей паралельних ребер є не гіршою
+за суму якостей перехресних ребер. При цьому на функцію $q$ обмежень не накладається.
+
+Розглядаються два випадки. Якщо задача є супермодулярною, і відображення $n$ відоме, 
+задача називається супермодулярною з відомою впорядкованістю. Коли відомо, що існує таке
+$n$, проте саме відображення невідоме, задача називається супермодулярною із 
+невідомою впорядкованістю.
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=1\textwidth]{images/submodularity_ilustr.jpg}
+  \caption{Властивість супермодулярності для ребер}
+  \label{fig:submodularity_example}
+\end{figure}
+Пряма перевірка супермодулярності --- обчислювально досить складна задача. Для 
+однієї пари об'єктів $tt'\in \Gamma$ складність перевірки пропорційна
+$\mathcal{O}(|K^2|)$, а перевірка всієї задачі на супермодулярність --- пропорційна
+$\mathcal{O}(|K^2|\cdot |\Gamma|)$. Така перевірка стає проблемою, у випадку, якщо
+множини $T$, $K$ досить великі, що не є рідкістю на практиці.
+
+Досить багато штрафів можна представити у вигляді супермодулярних 
+функцій. Наведемо деякі з них.
+
+\textbf{Модель Ізінга}
+\begin{equation}
+  g_{tt'}(k,k') = \lambda_{tt'}\cdot \llbracket t \neq t' \rrbracket,
+ \end{equation}
+для деяких констант $\lambda_{tt'}$, $tt'\in\Gamma$, $k\in K,k'\in K, \left\lvert K\right\rvert = 2 $.
+Можна показати, що використовуючи репараметризацію, 
+будь-яку бінарну функцію якостей можна перетворити в форму моделі Ізінга.
+
+\textbf{Модель Потса}
+
+Модель Потса є узагальненням моделі Ізінга для випадку, коли $|K|\geq 2$.
+Бінарні якості мають аналогічний вигляд
+\begin{equation}
+  g_{tt'}(k,k') = \lambda_{tt'}\cdot \llbracket t \neq t' \rrbracket.
+ \end{equation}
+
+Моделі Потса та Ізінга часто використовуються, коли задачі мають дискретний
+характер. Іноді ж потрібно на лише штрафувати за неправильну мітку, а штрафувати
+за за неправильну мітку пропорційно відстані до правильної. Для цього також 
+необхідно, щоб на множині $K$ існував порядок.
+
+\textbf{Пропорційні відстані}
+\begin{equation}
+  g_{tt'}(k,k') = |k - k'|^n, n\geq 2
+ \end{equation}
+Прикладами задач, де можуть застосовуватися штрафи такого типу: сегментація, 
+стереозір, постеризація, домальовування (inpainting), та багато інших.
+
+\textbf{Твердження.}
+Сума 2 супермодулярних функцій $g^1_{tt'}(k,k')$ та $g^2_{tt'}(k,k')$ також є супермодулярною
+\begin{equation}
+  g_{tt'}(k,k')=g^1_{tt'}(k,k')+g^2_{tt'}(k,k').
+ \end{equation} 
+
+\textbf{Твердження.}
+Репараметризація не впливає на властивість супермодулярності, тобто якщо функція була
+супермодулярною, після репараметризації вона також буде супермодулярною.
+Розглянемо довільну пару сусідів $tt'\in\Gamma$ і функцію якостей $g_{tt'}(k,k'), k\in K, k'\in K$.
+Якщо $g_{tt'}(k,k')$ є супермодулярною, то і
+\begin{equation}
+  g^{\varphi}_{tt'}(k,k')=g_{tt'}(k,k') + \varphi_{tt'}(k) + \varphi_{t't}(k')
+\end{equation} також є супермодулярною.
+Треба перевірити чи виконується нерівність
+\begin{equation}
+  g^{\varphi}_{tt'}(k,k') + g^{\varphi}_{tt'}(l,l')\geq g^{\varphi}_{tt'}(k,l') + g^{\varphi}_{tt'}(l,k').
+\end{equation}
+Розпишемо репараметризовані якості
+\begin{equation}
+  \begin{aligned}
+  g_{tt'}(k,k') + \varphi_{tt'}(k) + \varphi_{t't}(k') + g_{tt'}(l,l') + \varphi_{tt'}(l) + \varphi_{t't}(l') \geq \\
+  \geq g_{tt'}(k,l') + \varphi_{tt'}(k) + \varphi_{t't}(l') + g_{tt'}(l,k') + \varphi_{tt'}(l) + \varphi_{t't}(k').
+\end{aligned}
+\end{equation}
+Перенесемо всі доданки з $\varphi$ в одну частину
+\begin{equation}
+  \begin{aligned}
+  g_{tt'}(k,k') + g_{tt'}(l,l') \geq g_{tt'}(k,l') + g_{tt'}(l,k') + \\
+  + [\varphi_{tt'}(k) + \varphi_{t't}(l')  + \varphi_{tt'}(l) + \varphi_{t't}(k')-\\
+   -\varphi_{tt'}(k) - \varphi_{t't}(k') - \varphi_{tt'}(l) - \varphi_{t't}(l')].
+\end{aligned}
+\end{equation}
+Видно, що всі доданки з $\varphi$ скорочуються і потрібна рівність виконується.
