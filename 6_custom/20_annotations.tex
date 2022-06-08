@@ -17,9 +17,9 @@ $q_t(k)\in \mathbb{Z}$, $t\in T$, $k\in K$, і $g_{tt'}(k,k')\in \mathbb{Z}$, $t
 Зупиняємо роботу субградієнтний спуску на найменшому номері $i\in\mathbb{N}_0$ кроку, 
 за якого для $q^{\varphi^i}$ і $g^{\varphi^i}$ існує $\varepsilon$-узгоджений набір вершин та ребер.
 Результат застосування цієї процедури для обраних $q$, $g$ і $\varepsilon$ позначимо
-\begin{equation}
+\begin{equation*}
     \phi(q,g;\varepsilon)=\varphi^i.
-\end{equation}
+\end{equation*}
 Такий номер $i$ обов'язково знайдеться, адже відомо, що для будь-якого 
 $\varepsilon\in\mathbb{R_+}$ субградієнтний спуск за скінченну кількість $i\in\mathbb{N}_0$ кроків
 дійде до такого значення $\varphi^i$, за якого існує $\varepsilon$-узгоджений набір вершин та ребер \cite{lopatka_stop_cond}.
@@ -29,42 +29,42 @@ $\varepsilon\in\mathbb{R_+}$ субградієнтний спуск за скі
     \item Ініціалізуємо початкові значення якостей вершин, введемо функцію $q^0=q$ та номер кроку $j=0$.
     \item Якщо кожен об'єкт $t\in T$ має лише по одній мітці зі скінченною якістю, алгоритм завершується, 
     а розмітку $k^*$ будують у такий спосіб, що
-    \begin{equation}
+    \begin{equation*}
         q^j_t(k^*_t)>-\infty, \forall t\in T.
-    \end{equation}
+    \end{equation*}
     \item Якщо ж тривіального рішення не існує, продовжуємо алгоритм. Для довільного
     об'єкта $t\in T$, у якому залишилося більше однієї мітки зі скінченною вагою, фіксуємо довільну мітку $k\in K$.
     Функцію якостей ребер залишаємо, а функцію якостей вершин змінимо таким чином, щоб в об'єкті $t\in T$ залишилася тільки 
     обрана мітка $k$. Позначимо функцію $q':T\times K\rightarrow\mathbb{R}\cup\{-\infty\}$, 
     яка в об'єкті $t$ забороняє усі мітки окрім $k$
-    \begin{equation}
+    \begin{equation*}
         q'_{t'}(k') =
         \begin{cases}
             -\infty, & t'=t, k' \neq k,\\
             q^j_{t'}(k'), & \text{інакше.}
         \end{cases}
-    \end{equation}
+    \end{equation*}
     Якщо подана на вхід алгоритму задача була супермодулярною, то така модифікація якостей вершин
     залишить задачу супермодулярною, адже визначення супермодулярності не накладає обмежень на якості вершин.
     \item Виконуємо субградієнтний спуск, доки не отримаємо $\varepsilon$-узгоджений 
     набір вершин та ребер, для пошуку значення $E(q',g;\phi(q',g,\varepsilon))$. Якщо виконується рівність
-    \begin{equation}
+    \begin{equation*}
         \lfloor E(q',g;\phi(q',g,\varepsilon))\rfloor = \lfloor E(q,g;\phi(q,g,\varepsilon))\rfloor, 
-    \end{equation}
+    \end{equation*}
     то переходимо на наступну ітерацію $j=j+1$, створюємо функцію $q^j=q'$ (яка 
     забороняє в об'єкті $t\in T$ усі мітки окрім обраної мітки $k\in K$) та повертаємося до другого кроку
     (перевірка на те, чи завершився алгоритм). Якщо отриманий результат менший за той, що був отриманий до початку 
     роботи алгоритму пошуку розмітки, тобто
-    \begin{equation}
+    \begin{equation*}
         \lfloor E(q',g;\phi(q',g,\varepsilon))\rfloor < \lfloor E(q,g;\phi(q,g,\varepsilon))\rfloor, 
-    \end{equation}
+    \end{equation*}
     завершуємо алгоритм із відповіддю 'задача не є супермодулярною', тому що
     було доведено, що у випадку супермодулярної задачі значення $E(q,g;\phi(q,g,\varepsilon))$ дорівнює 
     вазі $G(k^*)$ оптимальної розмітки $k^*$, а наведена нерівність означатиме, що під час роботи алгоритму може бути знайдена 
     розмітка із меншою вагою. Якщо отриманий результат більший за той, що був отриманий до початку роботи алгоритму пошуку розмітки
-    \begin{equation}
+    \begin{equation*}
         \lfloor E(q',g;\phi(q',g,\varepsilon))\rfloor > \lfloor E(q,g;\phi(q,g,\varepsilon))\rfloor, 
-    \end{equation}
+    \end{equation*}
     виконуємо третій крок алгоритму для іншої мітки $k\in K$ (яку не було обрано раніше у даному об'єкті).
     Якщо ця нерівність виконується для всіх міток в об'єкті, то завершуємо алгоритм із 
     відповіддю 'задача не є супермодулярною', тому що за умови супермодулярності задачі обов'язково можна знайти мітку, що
@@ -109,21 +109,21 @@ $\lfloor E(q,g;\phi(q,g,\varepsilon))\rfloor$ (які ми здійснюємо 
 
 На етапі пошуку мітки $k_t\in K$ для об'єкта $t\in T$ на кожній ітерації $j$
 використаємо двійковий пошук: розіб'ємо множину $K$ на такі дві підмножини $K_1$ та $K_2$, що
-\begin{equation}
+\begin{equation*}
     \begin{cases}
         K_1\cup K_2 = K, \\
         K_1\cap K_2 = \emptyset, \\
         ||K_1|-|K_2|| \leq 1,
     \end{cases}
-\end{equation}
+\end{equation*}
 та введемо функцію $q'$
-\begin{equation}
+\begin{equation*}
     q'_{t'}(k') =
     \begin{cases}
         -\infty, & t'=t, k' \in  K_1,\\
         q^j_{t'}(k'), & \text{інакше.}
     \end{cases}
-\end{equation}
+\end{equation*}
 Якщо $\lfloor E(q',g;\phi(q',g,\varepsilon))\rfloor = \lfloor E(q,g;\phi(q,g,\varepsilon))\rfloor$, то шукане $k$ 
 може знаходитися у $K_2$, і його треба шукати у цій множині. Якщо 
 $\lfloor E(q',g;\phi(q',g,\varepsilon))\rfloor < \lfloor E(q,g;\phi(q,g,\varepsilon))\rfloor$, задача не є супермодулярною.
@@ -142,66 +142,66 @@ $\lfloor E(q',g;\phi(q',g,\varepsilon))\rfloor = \lfloor E(q,g;\phi(q,g,\varepsi
 (яка може бути невідомою) знайшовся $\varepsilon$-узгоджений набір вершин та ребер, 
 для кожної пари сусідніх об'єктів $tt'\in\Gamma$ можна обрати таке ребро 
 $((t,k_t),(t',l_{t'}))\in A$ (необов'язково різні), що 
-\begin{equation}
+\begin{equation*}
     \begin{cases}
         n_t(k_t)\geq n_t(l_t),\\
         n_{t'}(k_{t'})\geq n_{t'}(l_{t'}),
     \end{cases}
-\end{equation}
+\end{equation*}
 для яких справджується нерівність 
-\begin{equation}
+\begin{equation*}
     g_{tt'}(k_t,k_{t'})+g_{tt'}(l_t,l_{t'})\geq g_{tt'}(k_t,l_{t'})+g_{tt'}(l_t,k_{t'}).
-\end{equation}
+\end{equation*}
 
 З визначення $\varepsilon$-узгодженості маємо нерівності
-\begin{equation}
+\begin{equation*}
     g_{tt'}(k_t,l_{t'})\geq \max\limits_{l\in K, l'\in K}g_{tt'}(l,l')-\varepsilon,
-\end{equation}
-\begin{equation}
+\end{equation*}
+\begin{equation*}
     g_{tt'}(l_t,k_{t'})\geq \max\limits_{l\in K, l'\in K}g_{tt'}(l,l')-\varepsilon,
-\end{equation}
+\end{equation*}
 отже 
-\begin{equation}
+\begin{equation*}
     g_{tt'}(k_t,k_{t'})+g_{tt'}(l_t,l_{t'})\geq g_{tt'}(k_t,l_{t'})+g_{tt'}(l_t,k_{t'})\geq 2\cdot \max\limits_{l\in K, l'\in K}g_{tt'}(l,l')- 2\cdot \varepsilon.
-\end{equation}
+\end{equation*}
 З визначення максимального елементу маємо нерівність
-\begin{equation}
+\begin{equation*}
     -g_{tt'}(l_t,l_{t'})\geq -\max\limits_{l\in K, l'\in K}g_{tt'}(l,l'),
-\end{equation}
+\end{equation*}
 тому 
-\begin{equation}
+\begin{equation*}
     g_{tt'}(k_t,k_{t'})\geq \max\limits_{l\in K, l'\in K}g_{tt'}(l,l') - 2\cdot \varepsilon.
-\end{equation}
+\end{equation*}
 Зауважимо, що за умови
-\begin{equation}
+\begin{equation*}
     \max\limits_{l\in K, l'\in K}g_{tt'}(l,l') - \varepsilon > g_{tt'}(k_t,k_{t'})\geq \max\limits_{l\in K, l'\in K}g_{tt'}(l,l') - 2\cdot \varepsilon,
-\end{equation}
+\end{equation*}
 
 ребро $((t,k_t),(t',k_t'))$ не належить $\varepsilon$-узгодженому набору $A$ ребер, проте може 
 належати оптимальній розмітці.
 
 Якщо задача є супермодулярною і знайшовся $\varepsilon$-узгоджений набір вершин та ребер, існує 
 така розмітка $k:T\rightarrow K$, для якої справджується вираз 
-\begin{equation}
+\begin{equation*}
     \begin{aligned}
         \sum_{t \in T} q_t(k_t) + \sum_{tt' \in \Gamma} g_{tt'}(k,k')=\sum_{t \in T} q^\varphi_t(k_t) + \sum_{tt' \in \Gamma} g^\varphi_{tt'}(k,k')\geq\\
         \geq \sum_{t \in T} \left( \max_{l\in K} q^\varphi_t(l) -\varepsilon \right) + \sum_{tt' \in \Gamma}  \max\limits_{l\in K, l'\in K} \left( g^\varphi_{tt'}(l,l') - 2\cdot\varepsilon \right)=\\
         = \sum_{t \in T} \max_{l\in K} q^\varphi_t(l) - |T|\cdot\varepsilon  + \sum_{tt' \in \Gamma}  \max\limits_{l\in K, l'\in K} g^\varphi_{tt'}(l,l') - 2\cdot\Gamma\cdot\varepsilon=\\
         = \sum_{t \in T} \max_{l\in K} q^\varphi_t(l) + \sum_{tt' \in \Gamma}  \max\limits_{l\in K, l'\in K} g^\varphi_{tt'}(l,l') - \left( |T|+2\cdot\Gamma \right)\cdot\varepsilon.
     \end{aligned}
-\end{equation}
+\end{equation*}
 Найкраща розмітка не може мати більшу якість, ніж сума найбільших значень $q$ та $g$.
 Це означає, що за умови 
-\begin{equation}
+\begin{equation*}
     (|T|+2\cdot\Gamma)\cdot\varepsilon<1,
-\end{equation}
+\end{equation*}
 якість розмітки $k$ дорівнює вазі найкращої розмітки, бо функції $q$ і $g$ є цілочисельними \cite{diffusion_shlezinger}.
 
 Якщо задача є супермодулярною та має цілочисельні якості, то наведений алгоритм пошуку розмітки надасть
 оптимальну розмітку для 
-\begin{equation}
+\begin{equation*}
     \varepsilon \leq \frac{1}{|T|+2\cdot\Gamma+1}.
-\end{equation}
+\end{equation*}
 
 У загальному випадку $(\max,+)$ задачі розмітки належать класу складності 
 $EXP-APX$ --- класу задач, для яких за поліноміальний від розміру вхідний даних час 
@@ -218,9 +218,9 @@ $EXP-APX$ --- класу задач, для яких за поліноміаль
 задачі, та за допомогою якого можна перевірити коректність розв’язку за кількість
 операцій, що має поліноміальну залежність від розміру вхідних даних задачі. 
 Маючи $\varphi=\phi(q,g;\varepsilon)$ та $k^*$, можна легко перевірити нерівність
-\begin{equation}
+\begin{equation*}
     G(k^*)>E(q,g;\varphi)-1.
-\end{equation}
+\end{equation*}
 Справедливість цієї нерівності означає, що знайдена розмітка $k^*$ дійсно є розв’язком
 поданої на вхід алгоритму $(\max,+)$ задачі розмітки з цілочисельними якостями ребер та
 вершин.
